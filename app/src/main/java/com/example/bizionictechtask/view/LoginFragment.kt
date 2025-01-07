@@ -1,5 +1,6 @@
 package com.example.bizionictechtask.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,6 +21,12 @@ import com.example.data.model.Resource
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private val authViewModel: AuthViewModel by viewModels()
+    private var mActivity: MainActivity? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mActivity = context as? MainActivity
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,25 +39,27 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mActivity?.setTitle(getString(R.string.login_page))
         registerListener()
         observers()
     }
 
     private fun observers() {
         authViewModel.signInStatus.observe(viewLifecycleOwner) { data: Resource<Boolean> ->
-            binding.pbLoader.gone()
             when (data) {
                 is Resource.Loading -> {
                     binding.pbLoader.visible()
                 }
 
                 is Resource.Success -> {
+                    binding.pbLoader.gone()
                     requireActivity().showToast("Login Successful")
                     startActivity(Intent(requireActivity(), ContainerActivity::class.java))
                     requireActivity().finish()
                 }
 
                 is Resource.Error -> {
+                    binding.pbLoader.gone()
                     requireActivity().showToast(
                         "Login Failed: ${data.message}"
                     )

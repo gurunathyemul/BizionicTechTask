@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.bizionictechtask.R
 import com.example.bizionictechtask.adapter.PostAdapter
 import com.example.bizionictechtask.databinding.FragmentPostBinding
+import com.example.bizionictechtask.gone
 import com.example.bizionictechtask.viewmodel.PostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,12 +31,14 @@ class PostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         adapter = PostAdapter()
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = adapter
+        binding.apply {
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.adapter = adapter
+        }
 
         viewModel.pagedPosts.observe(viewLifecycleOwner) { pagingData ->
+            binding.pbLoader.gone()
             adapter.submitData(lifecycle, pagingData)
         }
     }

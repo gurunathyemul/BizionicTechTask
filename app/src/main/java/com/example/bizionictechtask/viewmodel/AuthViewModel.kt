@@ -18,6 +18,7 @@ class AuthViewModel : ViewModel() {
 
     fun loginUser(email: String, password: String) {
         viewModelScope.launch(IO) {
+            _signInStatus.postValue(Resource.Loading())
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -31,6 +32,7 @@ class AuthViewModel : ViewModel() {
 
     fun signUpUser(email: String, password: String) {
         viewModelScope.launch(IO) {
+            _signInStatus.postValue(Resource.Loading())
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {

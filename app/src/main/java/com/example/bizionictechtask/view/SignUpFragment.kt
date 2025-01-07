@@ -1,5 +1,6 @@
 package com.example.bizionictechtask.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.bizionictechtask.R
 import com.example.bizionictechtask.Validation.isValidEmail
 import com.example.bizionictechtask.databinding.FragmentSignupBinding
 import com.example.bizionictechtask.gone
@@ -20,6 +22,12 @@ class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignupBinding
     private val authViewModel: AuthViewModel by viewModels()
+    private var mActivity: MainActivity? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mActivity = context as? MainActivity
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +40,7 @@ class SignUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mActivity?.setTitle(getString(R.string.signup_page))
         registerListeners()
         observers()
         requireActivity().onBackPressedDispatcher.addCallback(
@@ -63,18 +72,19 @@ class SignUpFragment : Fragment() {
 
     private fun observers() {
         authViewModel.signUpStatus.observe(viewLifecycleOwner) { data: Resource<Boolean> ->
-            binding.pbLoader.gone()
             when (data) {
                 is Resource.Loading -> {
                     binding.pbLoader.visible()
                 }
 
                 is Resource.Success -> {
+                    binding.pbLoader.gone()
                     requireActivity().showToast("Registration Successful")
                     findNavController().popBackStack()
                 }
 
                 is Resource.Error -> {
+                    binding.pbLoader.gone()
                     requireActivity().showToast("Registration Failed ${data.message}")
                 }
             }

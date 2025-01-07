@@ -23,6 +23,10 @@ class MainActivity : AppCompatActivity() {
         setUpNavController()
     }
 
+    fun setTitle(title:String){
+        binding.tvTitle.text=title
+    }
+
     //initialising nav controller
     private fun setUpNavController() {
         val navHostFragment =
