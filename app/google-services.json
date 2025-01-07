@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "59240625440",
+    "project_id": "bizionictaskproject",
+    "storage_bucket": "bizionictaskproject.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59240625440:android:6c228c33c578e6bf3cd345",
+        "android_client_info": {
+          "package_name": "com.example.bizionictechtask"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxVU4HUfXNjo9lbm4roo2oODt_3tw2Ujs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
