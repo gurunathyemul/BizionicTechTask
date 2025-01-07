@@ -5,3 +5,7 @@ data class Post(
     val title: String,
     val body: String
 )
+
+data class PostList(
+    val postList: List<Post>
+)

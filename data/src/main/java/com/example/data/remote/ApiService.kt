@@ -10,4 +10,7 @@ interface ApiService {
         @Query("_page") page: Int,
         @Query("_limit") limit: Int
     ): List<Post>
+
+    @GET("posts")
+    suspend fun fetchPosts(): List<Post>
 }

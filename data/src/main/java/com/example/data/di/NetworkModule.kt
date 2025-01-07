@@ -2,7 +2,7 @@ package com.example.data.di
 
 import com.example.data.PostRepository
 import com.example.data.remote.ApiService
-import com.example.data.utils.BASE_URL
+import com.example.data.utils.DataConstants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

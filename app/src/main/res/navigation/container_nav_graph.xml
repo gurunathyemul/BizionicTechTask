@@ -8,6 +8,15 @@
         android:id="@+id/postFragment"
         android:name="com.example.bizionictechtask.view.PostFragment"
         android:label="Post Fragment"
+        tools:layout="@layout/fragment_post">
+    <action
+        android:id="@+id/postFragmentToWorkMFragment"
+        app:destination="@id/postListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postListFragment"
+        android:name="com.example.bizionictechtask.view.WorkMFragment"
+        android:label="Post WM Fragment"
         tools:layout="@layout/fragment_post" />
 
 </navigation>

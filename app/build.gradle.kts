@@ -79,14 +79,18 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.mockwebserver)
-    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
-    androidTestImplementation ("com.google.dagger:hilt-android-testing:2.38.1")
+    testImplementation (libs.kotlinx.coroutines.test)
+    androidTestImplementation (libs.hilt.android.testing)
 
     //retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.okhttp)
     implementation (libs.logging.interceptor)
+
+    //workmanager
+    implementation(libs.androidx.work.runtime.ktx)
+
 }
 kapt {
     correctErrorTypes = true
